@@ -1,0 +1,29 @@
+name: CD
+
+on: [push, workflow_dispatch]
+
+jobs:
+  cd:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install PyInstaller
+        run: pip install pyinstaller
+
+      - name: Create Executable
+        run: pyinstaller --onefile src/main.py
+
+      - name: Create Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          $date = Get-Date -Format "yyyy-MM-dd-hh-mm-ss"
+          $TAG_NAME = "$date-release"
+          gh release create $TAG_NAME dist/main.exe --title "Release $TAG_NAME" --notes "Automated release of executable" --latest
