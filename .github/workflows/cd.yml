@@ -18,7 +18,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Create Executable
-        run: pyinstaller --onefile --add-data "src/config.yml;src/" src/main.py
+        run: pyinstaller --onefile src/main.py
 
       - name: Create Release
         env:

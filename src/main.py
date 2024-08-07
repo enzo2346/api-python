@@ -1,14 +1,14 @@
-from flask import Flask
-import yaml
-
+from flask import Flask, render_template
+from src.conf import HOST, PORT
 app = Flask(__name__)
 
-with open("src/config.yml", 'r') as ymlfile:
-    cfg = yaml.safe_load(ymlfile)
-
-@app.route('/')
+@app.route("/")
 def hello_world():
-    return 'Hello, World!'
+    return "Hello, world!"
+
+@app.route("/home")
+def home():
+    return render_template("index.html", title="Home")
 
 if __name__ == '__main__':
-    app.run(debug=cfg['DEBUG'], host=cfg['HOST'], port=cfg['PORT'])
+    app.run(host=HOST, port=PORT)
