@@ -1,17 +1,20 @@
 import requests
 from flask import Flask, render_template, jsonify
+from flasgger import Swagger
 from src.conf import HOST, PORT, GITHUB_TOKEN, GITHUB_REPOSITORY, GITHUB_WORKFLOW_ID
-app = Flask(__name__)
 
-@app.route("/")
+app = Flask(__name__)
+swagger = Swagger(app, template_file='swagger.yaml')
+
+@app.route("/", methods=['GET'])
 def hello_world():
     return "Hello, world!"
 
-@app.route("/home")
+@app.route("/home", methods=['GET'])
 def home():
     return render_template("index.html", title="Home")
 
-@app.route("/workflow")
+@app.route("/workflow", methods=['POST'])
 def workflow():
     if not GITHUB_TOKEN:
         return jsonify({"error": "GitHub token is not set"}), 500

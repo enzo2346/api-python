@@ -1,0 +1,47 @@
+swagger: "2.0"
+info:
+  title: "My Flask API"
+  description: "This is a documentation for a Flask app."
+  version: "1.0.0"
+paths:
+  /:
+    get:
+      summary: "Hello World"
+      description: "Returns a simple greeting message."
+      responses:
+        200:
+          description: "A greeting message"
+          schema:
+            type: string
+            example: "Hello, world!"
+  /home:
+    get:
+      summary: "Home Page"
+      description: "Renders the home page."
+      responses:
+        200:
+          description: "Home page rendered"
+          schema:
+            type: string
+            example: "The content of index.html with title Home."
+  /workflow:
+    post:
+      summary: "Trigger GitHub Workflow"
+      description: "Triggers a GitHub workflow using the GitHub Actions API."
+      responses:
+        200:
+          description: "Workflow triggered successfully"
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: "Workflow triggered successfully"
+        500:
+          description: "Failed to trigger workflow or GitHub token not set"
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: "GitHub token is not set"
