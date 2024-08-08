@@ -3,21 +3,22 @@ name: Form in Workflow Dispatch Example
 on:
   workflow_dispatch:
     inputs:
-      logLevel:
-        description: 'Log level'
+      greeting:
+        description: 'Greeting list'
         required: true
         default: 'warning'
         type: choice
         options:
-        - info
-        - warning
-        - debug
-      tags:
-        description: 'Test scenario tags'
+        - Good morning
+        - Good afternoon
+        - Good evening
+        - Good night
+      from-flask:
+        description: 'from flask checkbox'
         required: false
         type: boolean
       environment:
-        description: 'Environment to run tests against'
+        description: 'GitHub Environment list'
         type: environment
         required: true
 
@@ -25,12 +26,5 @@ jobs:
   log-the-inputs:
     runs-on: ubuntu-latest
     steps:
-      - run: |
-          echo "Log level: $LEVEL"
-          echo "Tags: $TAGS"
-          echo "Environment: $ENVIRONMENT"
-        env:
-          LEVEL: ${{ inputs.logLevel }}
-          TAGS: ${{ inputs.tags }}
-          ENVIRONMENT: ${{ inputs.environment }}
-  
+      - run: >
+          echo "${{ inputs.greeting }} from flask: ${{ inputs.from-flask }} in GitHub ${{ inputs.environment }} env !"

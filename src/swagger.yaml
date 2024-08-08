@@ -6,16 +6,6 @@ info:
 paths:
   /:
     get:
-      summary: "Hello World"
-      description: "Returns a simple greeting message."
-      responses:
-        200:
-          description: "A greeting message"
-          schema:
-            type: string
-            example: "Hello, world!"
-  /home:
-    get:
       summary: "Home Page"
       description: "Renders the home page."
       responses:
@@ -24,6 +14,16 @@ paths:
           schema:
             type: string
             example: "The content of index.html with title Home."
+  /healthz:
+    get:
+      summary: "Hello World"
+      description: "Returns a simple greeting message."
+      responses:
+        200:
+          description: "A greeting message"
+          schema:
+            type: string
+            example: "Hello, world!"
   /workflow:
     post:
       summary: "Trigger GitHub Workflow"
