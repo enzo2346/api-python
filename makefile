@@ -3,7 +3,7 @@
 HOST = '0.0.0.0'
 PORT = '5000'
 GITHUB_TOKEN = '<GITHUB_TOKEN>'
-DOCKER_HUB_TOKEN = <DOCKER_HUB_TOKEN>
+TAG = V1
 
 run:
 	python -m src.main
@@ -13,14 +13,13 @@ test:
 	coverage report -m
 
 package:
-	pyinstaller --onefile --name api-python src/main.py
+	pyinstaller --onefile --name simple-flask-app src/main.py
 
 docker-run:
-	docker build -t api-python .
-	docker run -p ${PORT}:${PORT} -e HOST=${HOST} -e PORT=${PORT} -e GITHUB_TOKEN=${GITHUB_TOKEN} api-python
+	docker build -t simple-flask-app .
+	docker run -p ${PORT}:${PORT} -e HOST=${HOST} -e PORT=${PORT} -e GITHUB_TOKEN=${GITHUB_TOKEN} simple-flask-app
 
 docker-push:
-	docker login -u enzo2346 -p ${DOCKER_HUB_TOKEN}
-	docker build -t api-python .
-	docker tag api-python:latest enzo2346/api-python:latest
-	docker push enzo2346/api-python:latest
+	docker build -t simple-flask-app:${TAG} .
+	docker tag simple-flask-app:${TAG} enzo2346/simple-flask-app:${TAG}
+	docker push enzo2346/simple-flask-app:${TAG}
