@@ -17,3 +17,9 @@ To run this application:
 ```
 python -m src.main
 ```
+
+## Backlog
+
+- UT
+- add WSGI server
+- cd create release only when a commit have a specific name
