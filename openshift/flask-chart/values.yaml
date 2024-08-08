@@ -1,0 +1,58 @@
+# Default values for flask-chart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+configmap:
+  host: '0.0.0.0'
+  port: '5000'
+
+secret:
+  githubToken: 'dGVzdA=='
+
+image:
+  repository: enzo2346/simple-flask-app
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "v3"
+
+service:
+  type: ClusterIP
+  port: 5000
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+livenessProbe:
+  httpGet:
+    path: /healthz
+    port: http
+  
+readinessProbe:
+  httpGet:
+    path: /healthz
+    port: http
+
+# If autoscalling is set, the replicaCount will not be used
+replicaCount: 1
+
+autoscaling:
+  enabled: true
+  minReplicas: 1
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+# Additional volumes on the output Deployment definition.
+volumes:
+- name: empty-dir
+  emptyDir: {}
+
+# Additional volumeMounts on the output Deployment definition.
+volumeMounts:
+- mountPath: app/src/data
+  name: empty-dir
