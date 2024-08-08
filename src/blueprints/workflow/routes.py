@@ -17,8 +17,8 @@ def workflow():
     data = {
         'ref': 'main',
         'inputs': {
-            'logLevel':'info',
-            'tags':'true',
+            'greeting':'Good morning',
+            'from-flask':'true',
             'environment':'Test'
         }
     }

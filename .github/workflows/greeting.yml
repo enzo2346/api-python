@@ -1,4 +1,4 @@
-name: Form in Workflow Dispatch Example
+name: Greeting Workflow
 
 on:
   workflow_dispatch:
@@ -23,8 +23,8 @@ on:
         required: true
 
 jobs:
-  log-the-inputs:
+  hello-job:
     runs-on: ubuntu-latest
     steps:
       - run: >
-          echo "${{ inputs.greeting }} from flask: ${{ inputs.from-flask }} in GitHub ${{ inputs.environment }} env !"
+          echo "${{ inputs.greeting }} from flask: [${{ inputs.from-flask }}] in GitHub ${{ inputs.environment }} env !"
