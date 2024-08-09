@@ -6,7 +6,8 @@ spec:
   type: {{ .Values.service.type }}
   ports:
     - port: {{ .Values.service.port }}
-      targetPort: http
+      targetPort: {{ .Values.service.port }}
+      nodePort: 30008
       protocol: TCP
       name: http
   selector:
